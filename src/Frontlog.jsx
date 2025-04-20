@@ -8,6 +8,9 @@ import config from './config';
 
 
 const Frontlog = () => {
+
+    const apiUrl = process.env.REACT_APP_API_URL; 
+
     // Add state variables for login form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -82,7 +85,7 @@ const Frontlog = () => {
 
 
         
-        axios.post('http://localhost:8080/register', {
+        axios.post(`${apiUrl}/register`, {
             username: username,
             email: emailRegister,
             password: passwordRegister,
@@ -100,7 +103,7 @@ const Frontlog = () => {
                     });
 
                     // Update the local session
-                    axios.post('http://localhost:8080/session', {
+                    axios.post(`${apiUrl}/session`, {
                         userId: response.data.userId,
                         username: username,
                         email: emailRegister
@@ -109,7 +112,7 @@ const Frontlog = () => {
                             console.log('Session updated successfully');
 
                             // Retrieve the username from the session
-                            axios.get('http://localhost:8080/session')
+                            axios.get(`${apiUrl}/session`)
                                 .then(response => {
                                     const username = response.data.username;
                                     setLoggedInUser({ ...loggedInUser, username });
@@ -156,7 +159,7 @@ const Frontlog = () => {
         event.preventDefault();
 
 
-        axios.post('http://localhost:8080/login', {
+        axios.post(`${apiUrl}/login`, {
             email: email,
             password: password
         }, { withCredentials: true })
@@ -210,7 +213,7 @@ const Frontlog = () => {
 
         try {
 
-            const response = await axios.post('http://localhost:8080/check-username', { username: newUsername });
+            const response = await axios.post(`${apiUrl}/check-username`, { username: newUsername });
 
 
             if (response.data.exists) {

@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 function DeleteStudent() {
+
+  const apiUrl = process.env.REACT_APP_API_URL; 
+
   const { id } = useParams();
   const history = useHistory();
 
@@ -14,7 +17,7 @@ function DeleteStudent() {
 
   const deleteStudent = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/students/${id}`, {
+      const response = await fetch(`${apiUrl}/students/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

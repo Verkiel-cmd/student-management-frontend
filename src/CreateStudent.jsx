@@ -6,6 +6,8 @@ import './Webstyles/bootstrapError_style.css';
 
 function CreateStudent() {
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [isError, setIsError] = useState(false);
   const [touched, setTouched] = useState(false);
 
@@ -89,7 +91,7 @@ function CreateStudent() {
     if (isValid) {
       try {
         console.log('Sending data to API:', { name, email, phone, address }); // Log the data being sent
-        const response = await fetch('http://localhost:3001/students', {
+        const response = await fetch(`${apiUrl}/students`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

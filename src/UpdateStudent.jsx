@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/bootstrapError_style.css';
 
 function UpdateStudent() {
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [student, setStudent] = useState({
@@ -53,7 +56,7 @@ function UpdateStudent() {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/students/${id}`);
+        const response = await fetch(`${apiUrl}/students/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -135,7 +138,7 @@ function UpdateStudent() {
 
 
     try {
-      const response = await fetch(`http://localhost:3001/students/${id}`, {
+      const response = await fetch(`${apiUrl}/students/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

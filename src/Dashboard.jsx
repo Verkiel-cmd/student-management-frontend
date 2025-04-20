@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/DES_side.css';
 function Dashboard() {
+
+  const apiUrl = process.env.REACT_APP_API_URL; 
+
   const [totalStudents, setTotalStudents] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
   const [setError] = useState(null);
@@ -17,7 +20,7 @@ function Dashboard() {
   const handleLogout = async () => {
     try {
       // Send request to backend to destroy session
-      await fetch('http://localhost:8080/logout', {
+      await fetch(`${apiUrl}/logout`, {
         method: 'POST',
         credentials: 'include' // Ensures cookies/sessions are sent
       });
@@ -74,7 +77,7 @@ function Dashboard() {
     const fetchTotalStudents = async () => {
       try {
         console.log('Fetching total students...');
-        const response = await fetch('http://localhost:3001/total-students');
+        const response = await fetch(`${apiUrl}/total-students`);
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -97,7 +100,7 @@ function Dashboard() {
     const fetchTotalClasses = async () => {
       try {
         console.log('Fetching total students...');
-        const response = await fetch('http://localhost:5000/class-students');
+        const response = await fetch(`${apiUrl}/class-students`);
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -118,7 +121,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/user-details', { credentials: 'include' });
+        const res = await fetch(`${apiUrl}/api/user-details`, { credentials: 'include' });
 
 
         const text = await res.text();

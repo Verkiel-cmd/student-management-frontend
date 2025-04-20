@@ -4,6 +4,9 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Forgotpassword = () => {
+
+    const apiUrl = process.env.REACT_APP_API_URL; 
+
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -15,7 +18,7 @@ const Forgotpassword = () => {
     const handleSendOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:7000/send-otp', { email });
+            const response = await axios.post(`${apiUrl}/send-otp`, { email });
             if (response.data.success) {
                 setStage('otp');
                 setSuccess('OTP sent to your email');
@@ -29,7 +32,7 @@ const Forgotpassword = () => {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:7000/verify-otp', { email, otp });
+            const response = await axios.post(`${apiUrl}/verify-otp`, { email, otp });
             if (response.data.success) {
                 setStage('reset');
                 setSuccess('OTP verified successfully');
@@ -48,7 +51,7 @@ const Forgotpassword = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:7000/reset-password', {
+            const response = await axios.post(`${apiUrl}/reset-password`, {
                 email,
                 newPassword
             });

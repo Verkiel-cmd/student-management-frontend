@@ -7,6 +7,9 @@ import './Webstyles/bootstrapError_style.css';
 
 
 function Classes() {
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const [classes, setClasses] = useState([]);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => localStorage.getItem("sidebarState") === "expanded");
     const [isAuthDropdownOpen, setIsAuthDropdownOpen] = useState(() => localStorage.getItem("authDropdownState") === "expanded");
@@ -121,7 +124,7 @@ function Classes() {
     const fetchClasses = async () => {
         try {
             console.log('Fetching classes...');
-            const response = await fetch('http://localhost:5000/get-classes', {
+            const response = await fetch(`${apiUrl}/get-classes`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -153,7 +156,7 @@ function Classes() {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const res = await fetch('http://localhost:8080/api/user-details', { credentials: 'include' });
+                const res = await fetch(`${apiUrl}/api/user-details`, { credentials: 'include' });
                 if (!res.ok) throw new Error('Failed to fetch user details');
                 const data = await res.json();
                 setLoggedInUser(data.user);
@@ -224,8 +227,8 @@ function Classes() {
             try {
 
                 const url = editingId
-                    ? `http://localhost:5000/edit-class/${editingId}`
-                    : `http://localhost:5000/add-class`;
+                    ? `${apiUrl}/edit-class/${editingId}`
+                    : `${apiUrl}/add-class`;
                 const method = editingId ? 'PUT' : 'POST';
 
                 console.log('Sending class data:', classData);
@@ -335,7 +338,7 @@ function Classes() {
 
         try {
             console.log('Deleting class:', id);
-            const response = await fetch(`http://localhost:5000/delete-class/${id}`, {
+            const response = await fetch(`${apiUrl}/delete-class/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

@@ -5,6 +5,9 @@ import './Webstyles/DES_side.css';
 import DeleteModal from './DeleteModel';
 
 function ListStud() {
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  
   const [students, setStudents] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredStudents, setFilteredStudents] = useState([]);
@@ -56,7 +59,7 @@ function ListStud() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/students/${id}`, {
+      const response = await fetch(`${apiUrl}/students/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +134,7 @@ function ListStud() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/students?search=${searchTerm}`);
+        const response = await fetch(`${apiUrl}/students?search=${searchTerm}`);
         const data = await response.json();
         setStudents(data);
         setFilteredStudents(data);
@@ -146,7 +149,7 @@ function ListStud() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/user-details', { credentials: 'include' });
+        const res = await fetch(`${apiUrl}/api/user-details`, { credentials: 'include' });
         if (!res.ok) throw new Error('Failed to fetch user details');
         const data = await res.json();
         setLoggedInUser(data.user);  // ✅ Correctly stores user details
