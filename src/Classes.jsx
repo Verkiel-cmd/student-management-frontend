@@ -156,7 +156,7 @@ function Classes() {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const res = await fetch(`${apiUrl}/api/user-details`, { credentials: 'include' });
+                const res = await fetch(`${config.API_URL}/api/user-details`, { credentials: 'include' });
                 if (!res.ok) throw new Error('Failed to fetch user details');
                 const data = await res.json();
                 setLoggedInUser(data.user);
