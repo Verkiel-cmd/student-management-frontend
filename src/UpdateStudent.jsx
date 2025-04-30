@@ -56,7 +56,7 @@ function UpdateStudent() {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch(`${apiUrl}/students/${id}`);
+        const response = await fetch(`${config.API_URL}/students/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

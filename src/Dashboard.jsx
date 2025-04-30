@@ -20,7 +20,7 @@ function Dashboard() {
   const handleLogout = async () => {
     try {
       // Send request to backend to destroy session
-      await fetch(`${apiUrl}/logout`, {
+      await fetch(`${config.API_URL}/logout`, {
         method: 'POST',
         credentials: 'include' // Ensures cookies/sessions are sent
       });
@@ -121,7 +121,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await fetch(`${apiUrl}/api/user-details`, { credentials: 'include' });
+        const res = await fetch(`${config.API_URL}/api/user-details`, { credentials: 'include' });
 
 
         const text = await res.text();

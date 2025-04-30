@@ -17,7 +17,7 @@ function DeleteStudent() {
 
   const deleteStudent = async () => {
     try {
-      const response = await fetch(`${apiUrl}/students/${id}`, {
+      const response = await fetch(`${config.API_URL}/students/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

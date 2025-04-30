@@ -27,13 +27,14 @@ function ListStud() {
     localStorage.removeItem('loggedInUser');
 
     // Optionally, clear session cookies if used
-    axios.post('http://localhost:8080/logout', {}, { withCredentials: true })
+    axios.post(`${config.API_URL}/logout`, {}, { withCredentials: true })
         .then(() => {
             console.log('User logged out successfully');
         })
         .catch((error) => {
             console.error('Error during logout:', error);
         });
+
 
     // Redirect to the login page
     window.location.href = '/Frontlog';
@@ -134,7 +135,7 @@ function ListStud() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${apiUrl}/students?search=${searchTerm}`);
+        const response = await fetch(`${config.API_URL}/students?search=${searchTerm}`);
         const data = await response.json();
         setStudents(data);
         setFilteredStudents(data);
@@ -149,7 +150,7 @@ function ListStud() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await fetch(`${apiUrl}/api/user-details`, { credentials: 'include' });
+        const res = await fetch(`${config.API_URL}/api/user-details`, { credentials: 'include' });
         if (!res.ok) throw new Error('Failed to fetch user details');
         const data = await res.json();
         setLoggedInUser(data.user);  // ✅ Correctly stores user details

@@ -85,7 +85,7 @@ const Frontlog = () => {
 
 
         
-        axios.post(`${apiUrl}/register`, {
+        axios.post(`${config.API_URL}/register`, {
             username: username,
             email: emailRegister,
             password: passwordRegister,
@@ -103,7 +103,7 @@ const Frontlog = () => {
                     });
 
                     // Update the local session
-                    axios.post(`${apiUrl}/session`, {
+                    axios.post(`${config.API_URL}/session`, {
                         userId: response.data.userId,
                         username: username,
                         email: emailRegister
@@ -159,7 +159,7 @@ const Frontlog = () => {
         event.preventDefault();
 
 
-        axios.post(`${apiUrl}/login`, {
+        axios.post(`${config.API_URL}/login`, {
             email: email,
             password: password
         }, { withCredentials: true })
