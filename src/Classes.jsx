@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/DES_side.css';
 import './Webstyles/bootstrapError_style.css';
-import './config';
+import  config from'./config';
 
 
 
@@ -25,7 +25,7 @@ function Classes() {
     const handleLogout = async () => {
         try {
             // Send request to backend to destroy session
-            await fetch(`${config.API_URL}/logout`, {
+            await fetch(`${config.REACT_APP_API_URL}/logout`, {
                 method: 'POST',
                 credentials: 'include' // Ensures cookies/sessions are sent
             });
@@ -125,7 +125,7 @@ function Classes() {
     const fetchClasses = async () => {
         try {
             console.log('Fetching classes...');
-            const response = await fetch(`${config.API_URL}/get-classes`, {
+            const response = await fetch(`${config.REACT_APP_API_URL}/get-classes`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ function Classes() {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const res = await fetch(`${config.API_URL}/api/user-details`, { credentials: 'include' });
+                const res = await fetch(`${config.REACT_APP_API_URL}/api/user-details`, { credentials: 'include' });
                 if (!res.ok) throw new Error('Failed to fetch user details');
                 const data = await res.json();
                 setLoggedInUser(data.user);
@@ -228,8 +228,8 @@ function Classes() {
             try {
 
                 const url = editingId
-                    ? `${apiUrl}/edit-class/${editingId}`
-                    : `${apiUrl}/add-class`;
+                    ? `${config.REACT_APP_API_URL}/edit-class/${editingId}`
+                    : `${config.REACT_APP_API_URL}/add-class`;
                 const method = editingId ? 'PUT' : 'POST';
 
                 console.log('Sending class data:', classData);
@@ -339,7 +339,7 @@ function Classes() {
 
         try {
             console.log('Deleting class:', id);
-            const response = await fetch(`${apiUrl}/delete-class/${id}`, {
+            const response = await fetch(`${config.REACT_APP_API_URL}/delete-class/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

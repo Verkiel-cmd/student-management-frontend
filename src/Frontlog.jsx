@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/login_style.css';
-import './config';
+import  config from'./config';
 
 
 
@@ -85,7 +85,7 @@ const Frontlog = () => {
 
 
         
-        axios.post(`${config.API_URL}/register`, {
+        axios.post(`${config.REACT_APP_API_URL}/register`, {
             username: username,
             email: emailRegister,
             password: passwordRegister,
@@ -103,7 +103,7 @@ const Frontlog = () => {
                     });
 
                     // Update the local session
-                    axios.post(`${config.API_URL}/session`, {
+                    axios.post(`${config.REACT_APP_API_URL}/session`, {
                         userId: response.data.userId,
                         username: username,
                         email: emailRegister
@@ -112,7 +112,7 @@ const Frontlog = () => {
                             console.log('Session updated successfully');
 
                             // Retrieve the username from the session
-                            axios.get(`${apiUrl}/session`)
+                            axios.get(`${config.REACT_APP_API_URL}/session`)
                                 .then(response => {
                                     const username = response.data.username;
                                     setLoggedInUser({ ...loggedInUser, username });
@@ -159,7 +159,7 @@ const Frontlog = () => {
         event.preventDefault();
 
 
-        axios.post(`${config.API_URL}/login`, {
+        axios.post(`${config.REACT_APP_API_URL}/login`, {
             email: email,
             password: password
         }, { withCredentials: true })
@@ -213,7 +213,7 @@ const Frontlog = () => {
 
         try {
 
-            const response = await axios.post(`${apiUrl}/check-username`, { username: newUsername });
+            const response = await axios.post(`${config.REACT_APP_API_URL}/check-username`, { username: newUsername });
 
 
             if (response.data.exists) {
@@ -260,7 +260,7 @@ const Frontlog = () => {
     
         // Send the token to the backend for verification
         axios
-            .post(`${config.API_URL}/google-login`, { token }, { withCredentials: true })
+            .post(`${config.REACT_APP_API_URL}/google-login`, { token }, { withCredentials: true })
             .then((res) => {
                 if (res.data.success) {
                     // Store the user info in localStorage

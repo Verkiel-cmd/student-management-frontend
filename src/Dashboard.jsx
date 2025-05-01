@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/DES_side.css';
-import './config';
+import  config from'./config';
+
 function Dashboard() {
 
   const apiUrl = process.env.REACT_APP_API_URL; 
@@ -21,7 +22,7 @@ function Dashboard() {
   const handleLogout = async () => {
     try {
       // Send request to backend to destroy session
-      await fetch(`${config.API_URL}/logout`, {
+      await fetch(`${config.REACT_APP_API_URL}/logout`, {
         method: 'POST',
         credentials: 'include' // Ensures cookies/sessions are sent
       });
@@ -78,7 +79,7 @@ function Dashboard() {
     const fetchTotalStudents = async () => {
       try {
         console.log('Fetching total students...');
-        const response = await fetch(`${apiUrl}/total-students`);
+        const response = await fetch(`${config.REACT_APP_API_URL}/total-students`);
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -101,7 +102,7 @@ function Dashboard() {
     const fetchTotalClasses = async () => {
       try {
         console.log('Fetching total students...');
-        const response = await fetch(`${apiUrl}/class-students`);
+        const response = await fetch(`${config.REACT_APP_API_URL}/class-students`);
         console.log('Response status:', response.status);
 
         if (!response.ok) {
@@ -122,7 +123,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await fetch(`${config.API_URL}/api/user-details`, { credentials: 'include' });
+        const res = await fetch(`${config.REACT_APP_API_URL}/api/user-details`, { credentials: 'include' });
 
 
         const text = await res.text();
