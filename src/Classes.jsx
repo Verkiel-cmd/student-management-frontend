@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/DES_side.css';
 import './Webstyles/bootstrapError_style.css';
+import './config';
 
 
 
@@ -24,7 +25,7 @@ function Classes() {
     const handleLogout = async () => {
         try {
             // Send request to backend to destroy session
-            await fetch('http://localhost:8080/logout', {
+            await fetch(`${config.API_URL}/logout`, {
                 method: 'POST',
                 credentials: 'include' // Ensures cookies/sessions are sent
             });
@@ -124,7 +125,7 @@ function Classes() {
     const fetchClasses = async () => {
         try {
             console.log('Fetching classes...');
-            const response = await fetch(`${apiUrl}/get-classes`, {
+            const response = await fetch(`${config.API_URL}/get-classes`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

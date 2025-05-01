@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/bootstrapError_style.css';
+import './config';
 
 function UpdateStudent() {
 
@@ -138,7 +139,7 @@ function UpdateStudent() {
 
 
     try {
-      const response = await fetch(`${apiUrl}/students/${id}`, {
+      const response = await fetch(`${config.API_URL}/students/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

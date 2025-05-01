@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/login_style.css';
-import config from './config';
+import './config';
 
 
 

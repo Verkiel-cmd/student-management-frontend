@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Webstyles/DES_side.css';
 import DeleteModal from './DeleteModel';
+import './config';
 
 function ListStud() {
 
